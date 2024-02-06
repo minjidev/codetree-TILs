@@ -10,5 +10,9 @@ for (let f of fruits) {
     }
 }
 
-console.log(answer.join('\n'))
+if (answer.length > 0) {
+    console.log(answer.join('\n'))
+    
+} 
+
 console.log(answer.length)
