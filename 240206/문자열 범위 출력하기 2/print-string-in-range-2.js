@@ -4,7 +4,7 @@ const N = +num
 const reversed = input.split('').reverse()
 
 if (input.length <= N) {
-    console.log(reversed)
+    console.log(reversed.join(''))
 } else {
     console.log(reversed.slice(0, +num).join(''))
 }
