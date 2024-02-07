@@ -13,6 +13,7 @@ for (let i=0;i<str.length;i++) {
     }
     if (sameCount === target.length) {
         console.log(i)
+        return
     }
 }
 
