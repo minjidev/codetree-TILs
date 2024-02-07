@@ -16,6 +16,5 @@ for (let i=0;i<str.length;i++) {
     }
 }
 
-if (sameCount === 0) {
-    console.log(-1)
-}
+
+console.log(-1)
