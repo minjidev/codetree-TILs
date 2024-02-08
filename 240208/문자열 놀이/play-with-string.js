@@ -6,9 +6,7 @@ const query = input.slice(1).map(row => row.split(' ').map((e) => isNaN(e) ? e :
 
 for (let [type, a, b] of query) {
     if (type === 1) {
-        for (let i=0;i<arr.length;i++) {
-            [arr[a-1], arr[b-1]] = [arr[b-1], arr[a-1]]
-        }
+        [arr[a-1], arr[b-1]] = [arr[b-1], arr[a-1]]
     } else {
         for (let i=0;i<arr.length;i++) {
             if (arr[i] === a) {
