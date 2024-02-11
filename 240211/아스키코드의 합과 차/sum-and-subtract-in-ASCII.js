@@ -1,0 +1,5 @@
+const fs = require('fs')
+const [a, b] = fs.readFileSync(0).toString().trim().split(' ')
+const aChardCode = a.charCodeAt(0)
+const bCharCode = b.charCodeAt(0)
+console.log(aChardCode + bCharCode, Math.abs(aChardCode - bCharCode))
