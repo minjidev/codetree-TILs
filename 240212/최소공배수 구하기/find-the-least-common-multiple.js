@@ -1,11 +1,16 @@
 const fs = require('fs')
 const [n, m] = fs.readFileSync(0).toString().trim().split(' ').map(Number)
-let max = 0
 
-for (let i=1;i<=m;i++) {
-    if (n % i === 0 && m % i === 0) {
-        max = Math.max(max, i)
+function findLCM(n, m) {
+    let gcd = 0
+    const min = Math.min(n, m)
+    for (let i=1;i<=min;i++) {
+        if (n % i === 0 && m % i === 0) {
+            gcd = i
+        }
     }
+
+    console.log(n * m / gcd)
 }
 
-console.log(max * Math.floor(n/max) * Math.floor(m/max))
+findLCM(n, m)
