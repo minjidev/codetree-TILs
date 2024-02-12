@@ -5,7 +5,7 @@ function calculate(a, b) {
     const min = Math.min(a, b)
     const max = Math.max(a, b)
 
-    return [min+ 10, max * 2]
+    return min === a ? [min+10, max * 2] : [max*2, min+10]
 }
 
 const [n, m] = calculate(a, b)
