@@ -20,7 +20,7 @@ for (let i=0;i<N;i++) {
 for (let i=0;i<M;i++) {
     let seq = Array(N).fill(0)
     for (let j=0;j<N;j++) {
-        seq[j] = board[i][j]
+        seq[i] = board[i][j]
     }
     max = Math.max(max, getSeqSum(seq))
 }
