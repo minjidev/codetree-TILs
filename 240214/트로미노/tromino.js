@@ -1,28 +1,25 @@
 const fs = require('fs')
 const [nums, ...arr] = fs.readFileSync(0).toString().trim().split('\n')
-
 const [N, M] = nums.split(' ').map(Number)
 const board = arr.map(row => row.split(' ').map(Number))
 const dir = [[-1, 1], [-1, -1], [1, -1], [1, 1]]
 let max = 0
 
-const getSeqSum = (arr) => {
-    return arr.reduce((acc, cur) => acc + cur, 0)
-}
-
 // 가로 
 for (let i=0;i<N;i++) {
-    max = Math.max(max, getSeqSum(board[i]))
+    for (let j=0;j<M-2;j++) {
+        const sum = (board[i][j] + board[i][j+1] + board[i][j+2])
+        max = Math.max(max, sum)
+    }
 }
 
 
 // 세로 
 for (let i=0;i<M;i++) {
-    let seq = Array(N).fill(0)
-    for (let j=0;j<N;j++) {
-        seq[i] = board[i][j]
+    for (let j=0;j<N-2;j++) { 
+       const sum = (board[j][i] + board[j+1][i] + board[j+2][i])
+       max = Math.max(max, sum)
     }
-    max = Math.max(max, getSeqSum(seq))
 }
 
 // 1번 모양 
