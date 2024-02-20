@@ -9,25 +9,25 @@ const getCost = (k) => k * k + (k+1) * (k+1)
 
 const isOutside = (x, y) => x < 0 || y < 0 || x >= N || y >= N
 
+// 가장자리만 채굴 
 const getGoldCount = (row, col, k) => {
-  let goldCount = board[row][col] // 중심점
+  if (k === 0) {
+    return board[row][col]
+  }
 
-  for (let i=1;i<=k;i++) {
-    // 시작점 지정
-    let x = row - i
-    let y = col
-    // 4방향 순회 
-    for (let j=0;j<4;j++) {
-      for (let l=0;l<i;l++) {
-        // 금 채굴 
-        if (!isOutside(x, y)) {
-          goldCount += board[x][y]
-        }
+  let goldCount = 0
+  // 시작점 설정 
+  let x = row - k
+  let y = col
 
-        // 이동 
-        x += dir[j][0]
-        y += dir[j][1]
+  for (let i=0;i<4;i++) {
+    for (let j=0;j<k;j++) {
+      if (!isOutside(x, y)) {
+        goldCount += board[x][y]
       }
+
+      x += dir[i][0]
+      y += dir[i][1]
     }
   }
 
@@ -37,9 +37,10 @@ const getGoldCount = (row, col, k) => {
 
 for (let i=0;i<N;i++) {
   for (let j=0;j<N;j++) {
+    let goldCount = 0
     // 가능한 k까지 
     for (let k=0;k<2*(N-1)+1;k++) {
-      const goldCount = getGoldCount(i, j, k)
+      goldCount += getGoldCount(i, j, k)
       const cost = getCost(k)
       // 손해가 아닌 경우
       if (cost <= goldCount * M) {
