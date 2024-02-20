@@ -10,34 +10,36 @@ const isOutside = (x, y) => {
     return x < 0 || y < 0 || x >= N || y >= N
 }
 
-const getSum = (row, col, k) => {
+const getSum = (curX, curY, w, h) => {
     let sum = 0
+    const moveNum = [w, h, w, h]
     // 시작점 
-    let x = row + k
-    let y = col
 
     for (let i=0;i<4;i++) {
-        for (let j=0;j<k;j++) {
+        for (let j=0;j<moveNum[i];j++) {
             // 이동하다 범위 벗어나면 중단 
-            if (isOutside(x, y)) {
+            if (isOutside(curX, curY)) {
                 return 0
             }
 
-            sum += board[x][y]
+            sum += board[curX][curY]
 
-            x += dir[i][0]
-            y += dir[i][1]
+            curX += dir[i][0]
+            curY += dir[i][1]
         }
     }
 
     return sum 
 }
 
+const maxLen = 2*(N-1)
 for (let i=0;i<N;i++) {
     for (let j=0;j<N;j++) {
-        for (k=1;k<2*(N-1);k++) {
-            // 각 좌표에서 k일 때 합 구하기 
-            maxSum = Math.max(maxSum, getSum(i, j, k))
+        // 직사각형 가로, 세로 
+        for (let k=1;k<maxLen;k++) {
+            for (let l=1;l<maxLen;l++) {
+                maxSum = Math.max(maxSum, getSum(i, j, k, l))
+            }
         }
     }
 }
