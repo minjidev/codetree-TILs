@@ -18,11 +18,11 @@ const getGoldCount = (row, col, k) => {
     let y = col
     // 4방향 순회 
     for (let j=0;j<4;j++) {
-      for (let l=0;l<k;l++) {
-        if (isOutside(x, y)) continue
-
+      for (let l=0;l<i;l++) {
         // 금 채굴 
-        goldCount += board[x][y]
+        if (!isOutside(x, y)) {
+          goldCount += board[x][y]
+        }
 
         // 이동 
         x += dir[j][0]
