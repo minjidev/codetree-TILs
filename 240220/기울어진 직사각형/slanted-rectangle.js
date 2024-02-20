@@ -11,10 +11,6 @@ const isOutside = (x, y) => {
 }
 
 const getSum = (row, col, k) => {
-    if (k === 0) {
-        return board[row][col]
-    }
-
     let sum = 0
     // 시작점 
     let x = row + k
@@ -39,7 +35,7 @@ const getSum = (row, col, k) => {
 
 for (let i=0;i<N;i++) {
     for (let j=0;j<N;j++) {
-        for (k=0;k<2*(N-1);k++) {
+        for (k=1;k<2*(N-1);k++) {
             // 각 좌표에서 k일 때 합 구하기 
             maxSum = Math.max(maxSum, getSum(i, j, k))
         }
