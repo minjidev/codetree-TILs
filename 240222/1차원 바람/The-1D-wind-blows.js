@@ -50,6 +50,8 @@ const propagateUp = (startDir, startRow) => {
             const curDir = prevDir === 'L' ? 'R' : 'L'
             push(curDir, i)
             prevDir = curDir
+        } else {
+            break
         }
 
         prev = board[i]
@@ -59,7 +61,7 @@ const propagateUp = (startDir, startRow) => {
 }
 
 const propagateDown = (startDir, startRow) => {
-    let prev = board[startRow]
+    let prev = board[startRow-1]
     let prevDir = startDir
 // 아래쪽으로 전파
     for (let i=startRow;i<N;i++) {
@@ -76,6 +78,8 @@ const propagateDown = (startDir, startRow) => {
             const curDir = prevDir === 'L' ? 'R' : 'L'
             push(curDir, i)
             prevDir = curDir
+        } else {
+            break
         }
 
         prev = board[i]
