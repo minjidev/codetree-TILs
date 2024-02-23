@@ -1,7 +1,7 @@
 const fs = require('fs')
 const [n, ...arr] = fs.readFileSync(0).toString().trim().split('\n')
 const N = +n
-const board = arr.slice(0, N).map(row => row.split(' ').map(Number))
+const board = arr.slice(0, N).map(row => row.trim().split(' ').map(Number))
 let [r, c, m1, m2, m3, m4, d] = arr[N].split(' ').map(Number)
 const moveDir = [
     [[-1, 1], [-1, -1], [1, -1], [1, 1]], 
