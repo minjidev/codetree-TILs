@@ -26,7 +26,7 @@ for (let i=0;i<4;i++) {
 
 
 const tmp = Array.from({ length: N }, () => Array(N).fill(0))
-// 열 순회 -> 뒤에서부터 tmp에 담고 col 넣어주기 
+// 열 순회 -> 뒤에서부터 tmp에 담기 
 for (let i=0;i<N;i++) {
     let tmpEnd = N-1
     for (let j=N-1;j>=0;j--) {
@@ -35,7 +35,6 @@ for (let i=0;i<N;i++) {
             tmpEnd -= 1
         } 
     }
-
 }
 
 console.log(tmp.map(row => row.join(' ')).join('\n'))
