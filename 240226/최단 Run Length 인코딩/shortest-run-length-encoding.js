@@ -33,10 +33,11 @@ const runLengthEncoding = (str) => {
 }
 
 let cur = input
-for (let i=0;i<len-1;i++) {
+for (let i=0;i<len;i++) {
     const shifted = shiftToRight(cur)
-    const len = runLengthEncoding(shifted).length
 
+    const len = runLengthEncoding(shifted).length
+    
     minLen = Math.min(minLen, len)
     cur = shifted
 }
