@@ -9,10 +9,19 @@ while (true) {
     let prev = bombs[0]
     let exploded = 0
     const tmp = []
+    const len = bombs.length
 
-    for (let i=0;i<N;i++) {
+    for (let i=0;i<len;i++) {
         if (prev === bombs[i]) {
             count += 1
+
+            // 마지막 인덱스 체크
+            if (i === len-1 && count >= M) {
+                // s~e까지 0으로 변경  
+                for (let j=start;j<=i;j++) {
+                    bombs[j] = 0
+                }
+            }
         } else {
             if (count >= M) {
                 // s~e까지 0으로 변경  
@@ -29,7 +38,7 @@ while (true) {
 
 
     // 폭탄이 터지지 않은 경우 중지
-    for (let i=0;i<N;i++) {
+    for (let i=0;i<len;i++) {
         if (bombs[i] === 0) exploded += 1
     }
 
