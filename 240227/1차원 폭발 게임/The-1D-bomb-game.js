@@ -3,54 +3,58 @@ const [nums, ...arr] = fs.readFileSync(0).toString().trim().split('\n')
 const [N, M] = nums.split(' ').map(Number)
 let bombs = arr.map(Number) 
 
-while (true) {
-    let start = 0
-    let count = 0
-    let prev = bombs[0]
-    let exploded = 0
-    const tmp = []
-    const len = bombs.length
-
-    for (let i=0;i<len;i++) {
-        if (prev === bombs[i]) {
-            count += 1
-
-            // 마지막 인덱스 체크
-            if (i === len-1 && count >= M) {
-                // s~e까지 0으로 변경  
-                for (let j=start;j<=i;j++) {
-                    bombs[j] = 0
-                }
-            }
+const getEndIdxOfExplosion = (start, val) => {
+    let end = start + 1
+    while (end < bombs.length) {
+        if (bombs[end] === val) { 
+            end += 1
         } else {
-            if (count >= M) {
-                // s~e까지 0으로 변경  
-                for (let j=start;j<i;j++) {
-                    bombs[j] = 0
-                }
-            }
-        
-            count = 1
-            start = i 
+            break
         }
-        prev = bombs[i]
     }
 
+    return end - 1
+}
 
-    // 폭탄이 터지지 않은 경우 중지
-    for (let i=0;i<len;i++) {
-        if (bombs[i] === 0) exploded += 1
+const fillZero = (start, end) => {
+    for (let i=start;i<=end;i++) {
+        bombs[i] = 0
     }
+}
 
-    if (exploded === 0) break
-
+const drop = () => {
+    const tmp = []
     for (let cur of bombs) {
         if (cur === 0) continue
         
         tmp.push(cur)
     }
+    return tmp
+}
 
-    bombs = [...tmp]
+while (true) {
+    let didExplode = false
+    let start = 0
+    
+    // 폭탄 터뜨리기
+    for (let i=0;i<bombs.length;i++) {
+        // 이미 터지기로 예정되어 있는 경우 패스
+        if (bombs[i] === 0) continue
+
+        // 연속된 값의 가장 마지막 idx
+        let end = getEndIdxOfExplosion(i, bombs[i])
+        
+        if (end - i + 1 >= M) {
+            fillZero(i, end)
+            didExplode = true
+        }
+    }
+
+    // 폭탄이 터지지 않은 경우 중지
+    if (!didExplode) break
+
+    // 떨어뜨리기
+    bombs = [...drop()]
 }
 
 
