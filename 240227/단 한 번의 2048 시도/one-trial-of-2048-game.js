@@ -18,6 +18,7 @@ const log = (arr) => {
 }
 
 const pushToRight = () => {
+    tmp = Array.from({ length: LEN }, () => Array(LEN).fill(0))
     for (let i=0;i<LEN;i++) {
         let tmpEnd = LEN - 1
         for (let j=LEN-1;j>=0;j--) {
@@ -44,16 +45,16 @@ const combineToRight = () => {
 }
 
 
-// R 방향 
 const moveRight = () => {
     pushToRight()
     combineToRight()
     pushToRight()
 
-    log()
+    log(board)
 }
 
 const pushToLeft = () => {
+    tmp = Array.from({ length: LEN }, () => Array(LEN).fill(0))
     for (let i=0;i<LEN;i++) {
         tmpEnd = 0
         for (let j=0;j<LEN;j++) {
@@ -83,10 +84,11 @@ const moveLeft = () => {
     combineToLeft()
     pushToLeft()
     
-    log()
+    log(board)
 }
 
 const pushToUp = () => {
+    tmp = Array.from({ length: LEN }, () => Array(LEN).fill(0))
     for (let i=0;i<LEN;i++) {
         let tmpEnd = 0
         for (let j=0;j<LEN;j++) {
@@ -117,7 +119,7 @@ const moveUp = () => {
     combineToUp()
     pushToUp()    
 
-    log()
+    log(board)
 }
 
 const pushToDown = () => {
