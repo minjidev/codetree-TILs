@@ -146,7 +146,14 @@ while (rep < K) {
     rep += 1
 }
 
-explode()
+while (true) {
+    explode()
+
+    const hasBombsToExplode = checkBombsToExplode()
+
+    if (!hasBombsToExplode) break
+}
+
 const bombCount = countBombs()
 
 console.log(bombCount)
