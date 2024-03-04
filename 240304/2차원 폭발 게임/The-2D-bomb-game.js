@@ -124,16 +124,12 @@ function countBombs() {
 
 let rep = 0
 while (rep < K) {
-    while (true) {
+    while (checkBombsToExplode()) {
         // 폭발
         explode()
 
         // 중력
         drop()
-
-        const hasBombsToExplode = checkBombsToExplode()
-
-        if (!hasBombsToExplode) break
     }
 
 
@@ -146,13 +142,10 @@ while (rep < K) {
     rep += 1
 }
 
-while (true) {
-    explode()
-
-    const hasBombsToExplode = checkBombsToExplode()
-
-    if (!hasBombsToExplode) break
-}
+    while (checkBombsToExplode()) {
+        explode()
+        drop()
+    }
 
 const bombCount = countBombs()
 
