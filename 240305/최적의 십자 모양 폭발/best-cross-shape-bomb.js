@@ -76,10 +76,6 @@ function countPairs() {
     return count
 }
 
-function log() {
-    console.log(copied.map(row => row.join(' ')).join('\n'))
-    console.log('-------------------------')
-}
 
 for (let i=0;i<N;i++) {
     for (let j=0;j<N;j++) {
