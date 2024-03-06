@@ -5,7 +5,6 @@ const [R, C] = start.split(' ').map(num => num - 1)
 const board = arr.map(row => row.trim().split(''))
 let curX = R
 let curY = C
-board[curX][curY] = 0 // 방문 표시 
 
 
 /**
@@ -15,9 +14,14 @@ board[curX][curY] = 0 // 방문 표시
  * 3: 위 
  */
 let curDir = 0 
-const dirStr = ['오른쪽', '아래', '왼쪽', '위']
 const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-const DIR_LEN = 4
+const DIR_LEN = 4 
+// NxN 요소가 [f,f,f,f]인 3차원 배열 
+const ch = Array.from({ length: N }, () => 
+            Array.from({ length: N }, () => 
+                Array.from({ length: DIR_LEN }, () => false)))
+let count = 0
+let isRepeated = false
 
 
 function isOutside(x, y) {
@@ -32,14 +36,24 @@ function rotateCounterClockwise() {
     curDir = curDir - 1 < 0 ? DIR_LEN-1 : curDir - 1
 }
 
-let count = 0
 
 function moveStep(x, y) {
+    ch[curX][curY][curDir] = true // 현재 노드 방문 표시 
     curX = x
     curY = y
     count += 1
 
-    if (!isOutside(x, y)) board[x][y] = 0
+    if (isOutside(x, y)) {
+        return 
+    }
+
+    if (ch[x][y][curDir]) {
+        isRepeated = true
+        return
+    }
+
+
+    
 }
 
 
@@ -47,7 +61,7 @@ function move() {
     // 앞 방향 
     const nx = curX + dir[curDir][0]
     const ny = curY + dir[curDir][1]
-
+   
     // 앞 방향이 격자 밖이면 탈출 
     if (isOutside(nx, ny)) {
         moveStep(nx, ny)
@@ -73,38 +87,21 @@ function move() {
 }
 
 
-
-function isMovbale() {
-    let count = 0
-    // 4방향 벽으로 막혀있거나 이미 방문한 경우 
-    for (let k=0;k<DIR_LEN;k++) {
-        const nx = curX + dir[k][0]
-        const ny = curY + dir[k][1]
-
-        if (isOutside(nx, ny)) return true
-        if (board[nx][ny] === '#' || board[nx][ny] === 0) {
-            count += 1 
-        }
-    }
-
-    if (count === DIR_LEN) return false
-    // 그게 아니면 이동 가능 
-    return true
-}
-
 while (true) {
     move()
-
-    // 더 이상 이동할 수 없으면 중단 
-    if (!isMovbale()) {
-        count = -1
-        break
-    }
 
     // 탈출하면 중단
     if (isOutside(curX, curY)) {
         break
     }
+
+    // 더 이상 이동할 수 없으면 중단 
+    if (isRepeated) {
+        count = -1
+        break
+    }
+
+
 }
 
 console.log(count || -1)
