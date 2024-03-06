@@ -21,7 +21,7 @@ const DIR_LEN = 4
 
 
 function isOutside(x, y) {
-    return x < 0 || y < 0 || x >= N; y >= N
+    return x < 0 || y < 0 || x >= N || y >= N
 }
 
 function roateClockwise() {
@@ -92,15 +92,8 @@ function isMovbale() {
     return true
 }
 
-let rep = 0
-
 while (true) {
     move()
-
-    // console.log('curX, curY: ', curX, curY)
-    // console.log(dirStr[curDir])
-    // console.log(board.map(row => row.join(' ')).join('\n'))
-    // console.log('--------------------------')
 
     // 더 이상 이동할 수 없으면 중단 
     if (!isMovbale()) {
@@ -109,8 +102,9 @@ while (true) {
     }
 
     // 탈출하면 중단
-    if (isOutside(curX, curY)) break
-
+    if (isOutside(curX, curY)) {
+        break
+    }
 }
 
 console.log(count || -1)
