@@ -3,105 +3,77 @@ const [n, start, ...arr] = fs.readFileSync(0).toString().trim().split('\n')
 const N = +n
 const [R, C] = start.split(' ').map(num => num - 1)
 const board = arr.map(row => row.trim().split(''))
-let curX = R
-let curY = C
-
-
-/**
- * 0: 오른쪽
- * 1: 아래
- * 2: 왼쪽
- * 3: 위 
- */
-let curDir = 0 
-const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]]
-const DIR_LEN = 4 
-// NxN 요소가 [f,f,f,f]인 3차원 배열 
-const ch = Array.from({ length: N }, () => 
+const DIR_LEN = 4
+const visited = Array.from({ length: N }, () => 
             Array.from({ length: N }, () => 
                 Array.from({ length: DIR_LEN }, () => false)))
-let count = 0
-let isRepeated = false
-
+let curX = R
+let curY = C
+let curDir = 0
+let elpasedTime = 0
 
 function isOutside(x, y) {
-    return x < 0 || y < 0 || x >= N || y >= N
+    return x < 0 || y <0 || x >= N || y >= N
 }
 
-function roateClockwise() {
-    curDir = (curDir + 1) % 4
-}
-
-function rotateCounterClockwise() {
-    curDir = curDir - 1 < 0 ? DIR_LEN-1 : curDir - 1
+// 해당 위치에 벽이 있으면 이동 불가 
+function wallExist(x, y) {
+    return (!isOutside(x, y) && board[x][y] === '#')
 }
 
 
-function moveStep(x, y) {
-    ch[curX][curY][curDir] = true // 현재 노드 방문 표시 
-    curX = x
-    curY = y
-    count += 1
-
-    if (isOutside(x, y)) {
-        return 
+function simulate() {
+    // 현재 위치에 같은 방향으로 이동한 적 있으면 탈출 불가능  
+    if (visited[curX][curY][curDir]) {
+        console.log(-1)
+        process.exit(0);
     }
 
-    if (ch[x][y][curDir]) {
-        isRepeated = true
-        return
-    }
+    visited[curX][curY][curDir] = true
 
-
-    
-}
-
-
-function move() {
-    // 앞 방향 
+    const dir = [[0, 1], [1, 0], [0, -1], [-1, 0]]
     const nx = curX + dir[curDir][0]
     const ny = curY + dir[curDir][1]
-   
-    // 앞 방향이 격자 밖이면 탈출 
-    if (isOutside(nx, ny)) {
-        moveStep(nx, ny)
-        return
+
+    // 1. 바라보는 방향이 벽인 경우 반시계 방향 90' 회전 
+    if (wallExist(nx, ny)) {
+        curDir = (curDir - 1 + 4) % 4
     }
 
-    // 벽이면 반시계 90도 회전 
-    if (board[nx][ny] === '#') {
-        rotateCounterClockwise()
-    } else {
-        // 앞으로 이동, 이때 오른쪽이 벽이 아니면 시계방향 90도 회전해 앞으로 이동 
-        moveStep(nx, ny)
+    // 2. 바라보는 방향으로 이동이 가능하면 
+    // 2.1 바로 앞이 격자 밖이면 탈출
+    else if (isOutside(nx, ny)) {
+        curX = nx
+        curY = ny
+        elpasedTime += 1
+    }
 
+    // 2.2 격자 내에서 이동 가능 
+    else {
+        // 이동한다고 가정했을 때 오른쪽에 벽이 있는지 확인
         const rightDir = (curDir + 1) % 4
         const rx = nx + dir[rightDir][0]
         const ry = ny + dir[rightDir][1]
 
-        if (board[rx][ry] !== '#') {
-            roateClockwise()
-            moveStep(curX + dir[curDir][0], curY + dir[curDir][1]) // 앞으로 이동 
+        // 벽이 있다면 그 방향으로 이동 
+        if (wallExist(rx, ry)) {
+            curX = nx
+            curY = ny
+            elpasedTime += 1
+        } else {
+            // 아니면 시계방향 90' 회전하고 총 2칸 이동 
+            curX = rx
+            curY = ry
+            curDir = (curDir + 1) % 4
+            elpasedTime += 2
         }
     }
-}
-
-
-while (true) {
-    move()
-
-    // 탈출하면 중단
-    if (isOutside(curX, curY)) {
-        break
-    }
-
-    // 더 이상 이동할 수 없으면 중단 
-    if (isRepeated) {
-        count = -1
-        break
-    }
-
 
 }
 
-console.log(count || -1)
+
+while (!isOutside(curX, curY)) {
+    simulate()
+}
+
+console.log(elpasedTime)
