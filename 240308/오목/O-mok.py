@@ -5,14 +5,15 @@ DIR_LEN = 8
 board = [list(map(int, input().split())) for _ in range(BOARD_LEN)]
 dir_arr = [[-1, 0], [1, 0], [0, -1], [0, 1], [-1, -1], [1, 1], [-1, 1], [1, -1]] # 8방향 확인 
 location = []
-winner = []
+winner = 0
 def isOutside(x, y):   
     return x < 0 or y < 0 or x >= BOARD_LEN or y >= BOARD_LEN
 
 
 def DFS(x, y, turn, cur_dir, cnt):
     if cnt == 5:
-        winner.append(turn)
+        global winner
+        winner = turn
         location.extend([x, y])
         return
     
@@ -40,8 +41,8 @@ for i in range(BOARD_LEN):
             board[i][j] = cur
 
 
-if (winner):
-    print(winner[0])
+if (winner>0):
+    print(winner)
     [r1, c1, r2, c2] = location
     # 열로 놓인 경우 
     if r1 == r2:
