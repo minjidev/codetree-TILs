@@ -15,7 +15,7 @@ def isCarry(num1, num2):
     return False
 
 def getMaxSum(a, b, c):
-    if isCarry(a, b) or isCarry(b, c) or isCarry(a, c):
+    if isCarry(b, c):
         return 0
     else:
         return a + b + c
@@ -25,7 +25,13 @@ def getMaxSum(a, b, c):
 for i in range(n):
     for j in range(i+1, n):
         for k in range(j+1, n):
-            result = getMaxSum(arr[i], arr[j], arr[k])
+            if isCarry(arr[i], arr[j]): 
+                continue
+            if isCarry(arr[i] + arr[j], arr[k]): 
+                continue
+
+            # 세 개 다 carry가 아니라면 더하기 
+            result = arr[i] + arr[j] + arr[k]
             max_sum = max(max_sum, result)
         
 
