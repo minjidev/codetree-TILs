@@ -48,7 +48,7 @@ if (winner):
         print(r1+1, (c1+c2)//2+1)
     # 행으로 놓인 경우
     elif c1 == c2:
-        print((r1+r2)//2+1, c1) 
+        print((r1+r2)//2+1, c1+1) 
     # 대각선으로 놓인 경우 
     else:
         print((r1+r2)//2+1, (c1+c2)//2+1)
