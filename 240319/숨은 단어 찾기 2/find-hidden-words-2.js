@@ -21,7 +21,7 @@ for (let i=0;i<N;i++) {
                 const nx = x + dir[k][0]
                 const ny = y + dir[k][1]
 
-                if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue
+                if (nx < 0 || ny < 0 || nx >= N || ny >= M) break
                 if (board[nx][ny] === string[l+1]) {
                     x = nx
                     y = ny
