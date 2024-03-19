@@ -12,8 +12,8 @@ for (let i=0;i<N;i++) {
     for (let j=0;j<N-2;j++) {
         for (let k=0;k<N;k++) {
             for (let l=0;l<N-2;l++) {
-                // 사각형 겹치지 않는 경우 
-                if (i < k || j < l) {
+                // 행이 다르고, 첫 번째 직사각형의 끝열과 두 번째 직사각형의 시작열이 겹치지 않는 경우  
+                if (i < k || j+2 < l) {
                     const firstCount = board[i][j] + board[i][j+1] + board[i][j+2]
                     const secondCount = board[k][l] + board[k][l+1] + board[k][l+2]
     
