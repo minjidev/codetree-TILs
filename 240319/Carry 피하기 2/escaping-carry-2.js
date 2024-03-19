@@ -2,7 +2,7 @@ const fs = require('fs')
 const [n, ...arr] = fs.readFileSync(0).toString().trim().split('\n')
 const N = +n
 const nums = arr.map(Number)
-let maxSum = 0
+let maxSum = -1
 
 // isCarray(숫자 2개) => 각 자리수 더했을 때 carry 발생하면 true, 아니면 false 반환 
 function isCarry(a, b) {
