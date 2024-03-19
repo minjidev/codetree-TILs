@@ -6,12 +6,11 @@ let maxSum = -1
 
 // isCarray(숫자 2개) => 각 자리수 더했을 때 carry 발생하면 true, 아니면 false 반환 
 function isCarry(a, b) {
-    const num1 = String(a).split('')
-    const num2 = String(b).split('')
-    const minLen = Math.min(num1.length, num2.length)
+    for (let i=0;i<3;i++) {
+        const mod = 10**(i+1) // 해당 자리수까지의 숫자 구하기
+        const divider = 10**i // 해당 자리수 구하기
 
-    for (let i=0;i<minLen;i++) {
-        const sum = Number(num1.at(-1-i)) + Number(num2.at(-1-i))
+        const sum = Math.floor(a % mod / divider) + Math.floor(b % mod / divider)
 
         if (sum >= 10) return true
     }
