@@ -7,7 +7,7 @@ const [n, ...a] = fs.readFileSync(0).toString().trim().split('\n')
 const [N, K] = n.split(' ').map(Number)
 const arr = a.map(row => row.split(' ').map(Number))
 const MAX_LEN = 100
-const candies = Array(MAX_LEN).fill(0)
+const candies = Array(MAX_LEN+1).fill(0)
 const size = 2*K+1
 
 let maxCount = 0
@@ -18,8 +18,8 @@ for (let [val, idx] of arr) {
 
 // 바구니보다 K가 더 큰 경우 전체 사탕 개수 합 반환 
 if (MAX_LEN <= size) {
-    const sum = candies.reduce((a, v) => a + v, 0)
-    console.log(sum)
+    const count = candies.reduce((a, v) => a + v, 0)
+    console.log(count)
 
     return
 }
