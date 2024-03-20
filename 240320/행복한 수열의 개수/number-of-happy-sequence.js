@@ -6,42 +6,42 @@ const board = arr.map(row => row.split(' ').map(Number))
 let answer = 0
 
 for (let i=0;i<N;i++) {
-    let count = 1
-    for (let j=1;j<N;j++) {
-        if (board[i][j-1] === board[i][j]) {
+    let count = 0
+    let rowPrev = 0
+    
+    for (let j=0;j<N;j++) {
+        if (rowPrev === board[i][j]) {
             count += 1
         } else {
             count = 1
         }
 
-        if (count >= M) {
-            break
-        }
-    }
+        rowPrev = board[i][j]
 
-    if (count >= M) {
-        answer += 1
+        if (count >= M) {
+            answer += 1
+        }
+       
     }
 }
 
 for (let i=0;i<N;i++) {
-    let count = 1
-    for (let j=1;j<N;j++) {
-        if (board[j-1][i] === board[j][i]) {
+    let count = 0
+    let colPrev = 0
+
+    for (let j=0;j<N;j++) {
+        if (colPrev === board[j][i]) {
             count += 1
         } else {
             count = 1
         }
 
+        colPrev = board[j][i]
+
         if (count >= M) {
-            break
+            answer += 1
         }
     }
-
-    if (count >= M) {
-        answer += 1
-    }
-
 }
 
 console.log(answer)
