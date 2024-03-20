@@ -16,7 +16,15 @@ for (let [val, idx] of arr) {
     candies[idx] += val
 }
 
+// 바구니보다 K가 더 큰 경우 전체 사탕 개수 합 반환 
+if (MAX_LEN <= size) {
+    const sum = candies.reduce((a, v) => a + v, 0)
+    console.log(sum)
 
+    return
+}
+
+// 아니면 구간 잡아서 확인 
 for (let i=0;i<MAX_LEN-size;i++) {
     let count = 0
     for (let j=0;j<size;j++) {
