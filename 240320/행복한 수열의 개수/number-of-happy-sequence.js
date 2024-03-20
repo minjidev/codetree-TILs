@@ -20,6 +20,7 @@ for (let i=0;i<N;i++) {
 
         if (count >= M) {
             answer += 1
+            break
         }
        
     }
@@ -40,6 +41,7 @@ for (let i=0;i<N;i++) {
 
         if (count >= M) {
             answer += 1
+            break
         }
     }
 }
