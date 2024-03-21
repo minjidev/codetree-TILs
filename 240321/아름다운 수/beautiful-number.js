@@ -9,24 +9,18 @@ let count = 0
 
 // 아름다운 수인지 확인
 function isBeautifulNumber(arr) {
-    let curCount = 0
-    let prev = arr[0]
+    for (let i=0;i<N;i+=arr[i]) {
+        // 해당 숫자만큼 연속할 때 끝점이 배열을 내에 있는지 확인  
+        if (i + arr[i] - 1 >= N) {
+            return false
+        } 
 
-    for (let i=0;i<N;i++) {
-        if (prev === arr[i]) {
-            curCount += 1
-        } else {
-            if (curCount % prev !== 0) {
+        // 해당 숫자만큼 연속하는지 확인 
+        for (let j=i;j<i+arr[i];j++) {
+            if (arr[j] !== arr[i]) {
                 return false
             }
-            curCount = 1
-        }
-
-        prev = arr[i]
-    }
-
-    if (curCount % prev !== 0) {
-        return false
+        }    
     }
 
     return true
