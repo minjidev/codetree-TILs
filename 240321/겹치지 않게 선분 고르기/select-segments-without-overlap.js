@@ -35,13 +35,11 @@ function DFS(L, selected) {
         return
     }
 
-    
-    for (let i=0;i<N;i++) {
-        // 선분 뽑기 
-        DFS(L+1, [...selected, lines[i]])
-        // 선분 뽑지 않기
-        DFS(L+1, selected)
-    }
+    // 선분 뽑기 
+    DFS(L+1, [...selected, lines[L]])
+    // 선분 뽑지 않기
+    DFS(L+1, selected)
+
 }
 
 // 뽑을 선분 개수 
