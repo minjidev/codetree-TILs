@@ -4,9 +4,9 @@ const [n, ...input] = fs.readFileSync(0).toString().trim().split('\n')
 const N = +n
 const board = input.map(row => row.split(' ').map(Number))
 const dir = [
-    [[-2, 0], [-1, 0], [1, 0], [2, 0]],
-    [[-1, 0], [1, 0], [0, -1], [0, 1]],
-    [[-1, -1], [1, 1], [1, -1], [-1, 1]]
+    [[-2, 0], [-1, 0], [1, 0], [2, 0], [0, 0]],
+    [[-1, 0], [1, 0], [0, -1], [0, 1], [0, 0]],
+    [[-1, -1], [1, 1], [1, -1], [-1, 1], [0, 0]]
 ]
 const tmp = Array(N*N).fill(0) // 방향 정할 배열 
 let bombsCount = 0
@@ -40,15 +40,10 @@ function DFS(L) {
         for (let i=0;i<N;i++) {
             for (let j=0;j<N;j++) {
                 if (board[i][j] === 0) continue
-                // 시작점 폭발 = 2
-                if (copy[i][j] !== 2) {
-                    copy[i][j] = 2
-                    exploded += 1
-                }
                
-                // 나머지 폭발
-                for (let k=0;k<4;k++) {
-                    const idx = tmp[dirIndex]
+                // 나머지 폭발 = 2
+                for (let k=0;k<5;k++) {
+                    const idx = tmp[dirIndex] // 현재 폭발 타입 지정
                     const nx = i + dir[idx][k][0]
                     const ny = j + dir[idx][k][1]
 
