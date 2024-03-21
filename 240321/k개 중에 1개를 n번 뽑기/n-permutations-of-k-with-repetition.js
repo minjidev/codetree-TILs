@@ -1,17 +1,16 @@
 const fs = require('fs')
 const [K, N] = fs.readFileSync(0).toString().trim().split(' ').map(Number)
-const answer = []
+const tmp = Array(N).fill(0)
 
 function DFS(L) {
     if (L === N) {
-        console.log(answer.join(' '))
+        console.log(tmp.slice().join(' '))
         return 
     }
 
     for (let i=1;i<=K;i++) {
-        answer.push(i)
+        tmp[L] = i
         DFS(L+1)
-        answer.pop()
     }
 
 
