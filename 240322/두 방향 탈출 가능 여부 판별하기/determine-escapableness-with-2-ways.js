@@ -21,10 +21,12 @@ function DFS(x, y) {
         if (nx < 0 || ny < 0 || nx >= N || ny >= M) continue
         if (board[nx][ny] === 0) continue
 
+        
+        board[nx][ny] = 0
         DFS(nx, ny)
     }
 }
 
 board[0][0] = 0
-DFS(0, 0)
+// DFS(0, 0)
 console.log(count)
