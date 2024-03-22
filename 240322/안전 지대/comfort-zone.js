@@ -62,9 +62,7 @@ for (let h=1;h<=maxH;h++) {
     if (maxCount < safeAreaCount) {
         maxCount = safeAreaCount
         minK = h
-    } else if (maxCount === safeAreaCount) {
-        minK = Math.min(minK, h)
-    }
+    } 
 }
 
 console.log([minK, maxCount].join(' '))
