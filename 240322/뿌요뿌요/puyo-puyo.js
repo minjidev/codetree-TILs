@@ -13,7 +13,7 @@ let area = 0
 
 for (let i=0;i<N;i++) {
     for (let j=0;j<N;j++) {
-        if (board[i][j] === 0) continue
+        if (ch[i][j] === 1) continue
         
         area = 0
         ch[i][j] = 1
