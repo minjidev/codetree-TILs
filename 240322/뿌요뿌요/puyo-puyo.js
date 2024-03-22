@@ -20,9 +20,9 @@ for (let i=0;i<N;i++) {
         DFS(i, j)
 
         if (area >= 4) {
-            blockCount += 1
-            maxCount = Math.max(maxCount, area)
+            blockCount += 1 
         }
+        maxCount = Math.max(maxCount, area)
     }
 }
 
