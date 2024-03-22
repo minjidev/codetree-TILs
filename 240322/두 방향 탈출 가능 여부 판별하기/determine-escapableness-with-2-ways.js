@@ -28,5 +28,5 @@ function DFS(x, y) {
 }
 
 board[0][0] = 0
-// DFS(0, 0)
+DFS(0, 0)
 console.log(count)
