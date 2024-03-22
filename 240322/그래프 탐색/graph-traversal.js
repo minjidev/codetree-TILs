@@ -20,13 +20,15 @@ for (let [s, e] of arr) {
 
 function DFS(L) {
     for (let i=0;i<graph[L].length;i++) {
-        if (!ch[i]) {
-            ch[i] = 1
+        const cur = graph[L][i]
+        if (!ch[cur]) {
+            ch[cur] = 1
             count += 1
-            DFS(L+1)
+            DFS(cur)
         } 
     }
 }
 
+ch[1] = 1
 DFS(1)
 console.log(count)
